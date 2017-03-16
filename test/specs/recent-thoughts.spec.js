@@ -31,6 +31,39 @@
         let recent = document.querySelectorAll('main.recent article');
         expect(recent.length).to.equal(2);
       });
+      it('should be able to handle en empty array', function() {
+        window.thoughter.showRecent([]);
+        let htmlElements = document.querySelectorAll('articles');
+        expect( htmlElements.length ).to.equal(0);
+      });
+      it('should handle incorrect properties', function() {
+        window.thoughter.showRecent([
+          {
+            name: ' ',
+          }
+        ]);
+        let recent = document.querySelectorAll('main.recent article');
+        expect( recent.length ).to.equal(0);
+      });
+      it('should have the class of panel on an article', function() {
+
+        window.thoughter.showRecent([
+          {
+            content: ' ',
+            createTime:' ',
+            id:' '
+          }
+        ]);
+
+        let testElement = document.querySelector('article');
+        expect(testElement.classList.contains('panel')).to.be.true;
+        expect(testElement.classList.contains('panel-info')).to.be.true;
+        expect(testElement.hasAttribute('id')).to.be.true;
+        expect(testElement.getAttribute('id')).to.equal('thought- ');
+
+
+
+      });
     });
   });
 
