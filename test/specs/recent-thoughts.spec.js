@@ -21,12 +21,15 @@
       });
       it('should check for required properties for each entry', function() {
         window.thoughter.showRecent([
-            {content: '',
-            createTime:'',
-            id:''}
+            {content: ' ',
+            createTime:' ',
+            id:'1'},
+            {content: ' ',
+            createTime:' ',
+            id:'2'}
           ]);
-        let recent = document.querySelectorAll('main.recent');
-        expect(recent.length).to.equal(1);
+        let recent = document.querySelectorAll('main.recent article');
+        expect(recent.length).to.equal(2);
       });
     });
   });
