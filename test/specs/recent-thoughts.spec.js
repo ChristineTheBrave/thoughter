@@ -12,7 +12,7 @@
         document.querySelector('body').appendChild(main);
       });
       afterEach(function() {
-        let main = document.querySelector('main');
+        let main = document.querySelector('main.recent');
         main.parentNode.removeChild(main);
       });
 
