@@ -60,9 +60,6 @@
         expect(testElement.classList.contains('panel-info')).to.be.true;
         expect(testElement.hasAttribute('id')).to.be.true;
         expect(testElement.getAttribute('id')).to.equal('thought- ');
-
-
-
       });
     });
   });
