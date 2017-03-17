@@ -1,74 +1,87 @@
 
 module.exports = function configureGrunt(gruntConfig) {
 
-    gruntConfig.initConfig({
+  gruntConfig.initConfig({
 
-      clean: ['build/'],
+    clean: ['build/'],
 
-      copy:{
-        copythehtml: {
-          files: [
-            {
-              cwd: 'src/',
-              src: [ '*.html' ],
-              dest: 'build/',
-              expand: true
-            }
-          ]
-        },
-
-
-        copythejquery: {
-          files: [
-            {
-              cwd: 'src/js',
-              src: ['jquery.js'],
-              dest: 'build/js/vendor/',
-              expand: true
-            }
-          ]
-        }
-      },
-      sass: {
-        all: {
-          files: {
-            'build/style.css': 'src/sass/main.scss'
+    copy:{
+      copythehtml: {
+        files: [
+          {
+            cwd: 'src/',
+            src: [ '*.html' ],
+            dest: 'build/',
+            expand: true
           }
-        }
+        ]
       },
 
-      jshint: {
-        appjs: {
-          options: {
-            jshintrc: '.jshintrc'
-          },
-          files: {
-            src: ['src/**/*.js']
+
+      copythejquery: {
+        files: [
+          {
+            cwd: 'node_modules/jquery/dist',
+            src: ['jquery.js'],
+            dest: 'build/js/vendor/',
+            expand: true
           }
-        }
+        ]
+
       },
 
-      karma:{
-        all: {
-          options: {
-            frameworks: ['mocha', 'chai'],
-            browsers: ['Chrome'],
-            singleRun: true,
-            files: [
-              //globbing pattern
-              //look in src/ directory and ANY subdirectory
-              //for ANY file that ends in .js
-              'src/**/*.js',
-              'node_modules/sinon/pkg/sinon-2.0.0.js',
-              'test/specs/**/*.js'
-            ]
+      copythejs:{
+        files: [
+          {
+            cwd: 'src/js',
+            src: ['*.js'],
+            dest: 'build/js/',
+            expand: true
           }
+        ]
+      }
+    },
+
+    sass: {
+      all: {
+        files: {
+          'build/style.css': 'src/sass/main.scss'
         }
       }
-    });
+    },
 
-    require('load-grunt-tasks')(gruntConfig);
+    jshint: {
+      appjs: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        files: {
+          src: ['src/**/*.js']
+        }
+      }
+    },
 
-    gruntConfig.registerTask('build',['jshint','karma','clean','copy','sass']);
+    karma:{
+      all: {
+        options: {
+          frameworks: ['mocha', 'chai'],
+          browsers: ['Chrome'],
+          singleRun: true,
+          files: [
+            //globbing pattern
+            //look in src/ directory and ANY subdirectory
+            //for ANY file that ends in .js
+            'src/**/*.js',
+            'node_modules/sinon/pkg/sinon-2.0.0.js',
+            'test/specs/**/*.js'
+          ]
+        }
+      }
+    }
+  });
+
+  require('load-grunt-tasks')(gruntConfig);
+
+  gruntConfig.registerTask('build',['jshint','karma','clean','copy','sass']);
 
 };
